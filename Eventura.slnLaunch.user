@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "eventura.client\\eventura.client.esproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Eventura.Server\\Eventura.Server.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
