@@ -1,0 +1,31 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--bg-color);
+}
+
+.login-card {
+  width: 350px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.full-width {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.register-link {
+  margin-top: 16px;
+  text-align: center;
+}
+

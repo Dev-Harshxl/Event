@@ -1,0 +1,6 @@
+@Eventura.Server_HostAddress = http://localhost:5030
+
+GET {{Eventura.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
