@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Eventura.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c0736be00bbb4a7ebd4dc48d49e010de9af0d61")]
 [assembly: System.Reflection.AssemblyProductAttribute("Eventura.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Eventura.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
