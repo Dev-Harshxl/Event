@@ -1,42 +1,176 @@
-<mat-card class="register-card">
-  <h2>Register</h2>
-<br/>
-<br/>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Name</mat-label>
-      <input matInput formControlName="name" type="text" placeholder="Enter your name" />
-      <!-- <mat-error *ngIf="name?.hasError('required')">Name is required</mat-error>
-      <mat-error *ngIf="name?.hasError('minlength')">Minimum 3 characters</mat-error> -->
-    </mat-form-field>
+<!-- register.component.html -->
+<div class="auth-wrapper">
+  <div class="auth-container" [class.reversed]="isReversed">
+    <!-- Content Side -->
+    <div class="auth-side left-side">
+      <div class="brand">
+        <h1>🎉 Eventura</h1>
+        <p>Join our community today!</p>
+      </div>
+      <!-- <div class="art">
+        <img src="assets/mic.png" alt="Mic Skeleton" />
+        <img src="assets/guitar.png" alt="Guitar Skeleton" />
+        <img src="assets/stage.png" alt="Stage Skeleton" />
+        <img src="assets/plants.png" alt="Plant Skeleton" />
+      </div> -->
+      <!-- In both login.component.html and register.component.html -->
+      <div class="skeleton-art">
+        <!-- Singing Skeleton with Mic -->
+        <div class="skeleton-figure">
+          <svg class="skeleton-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <circle cx="100" cy="60" r="25" fill="#f0f0f0" class="bone bone-1" />
+            <!-- Cap -->
+            <path d="M80,45 C80,30 120,30 120,45 L120,35 C120,20 80,20 80,35 Z" fill="#ff6b6b" />
+            <path d="M75,35 C75,25 125,25 125,35 L125,30 C125,20 75,20 75,30 Z" fill="#ff8e8e" />
+            <!-- Body -->
+            <path d="M90,85 L110,85 L110,140 L90,140 Z" fill="#f0f0f0" class="bone bone-2" />
+            <!-- Arms -->
+            <path d="M110,95 L150,75 L145,85 L110,105 Z" fill="#f0f0f0" class="bone bone-3" />
+            <path d="M90,95 L50,75 L55,85 L90,105 Z" fill="#f0f0f0" class="bone bone-4" />
+            <!-- Legs -->
+            <path d="M95,140 L95,170 L90,170 L90,140 Z" fill="#f0f0f0" class="bone bone-1" />
+            <path d="M105,140 L105,170 L110,170 L110,140 Z" fill="#f0f0f0" class="bone bone-2" />
+            <!-- Mic -->
+            <path d="M150,65 L170,45 L165,60 L150,75 Z" fill="#4a4a4a" />
+            <circle cx="175" cy="40" r="10" fill="#ff6b6b" />
+            <circle cx="175" cy="40" r="5" fill="#f0f0f0" />
+          </svg>
+          <div class="skeleton-label">Singing</div>
+        </div>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" type="email" placeholder="Enter your email" />
-      <!-- <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
-      <mat-error *ngIf="email?.hasError('email')">Enter a valid email</mat-error> -->
-    </mat-form-field>
+        <!-- Guitar Skeleton -->
+        <div class="skeleton-figure">
+          <svg class="skeleton-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <circle cx="100" cy="60" r="25" fill="#f0f0f0" class="bone bone-2" />
+            <!-- Cap -->
+            <path d="M80,45 C80,30 120,30 120,45 L120,35 C120,20 80,20 80,35 Z" fill="#4ecdc4" />
+            <path d="M75,35 C75,25 125,25 125,35 L125,30 C125,20 75,20 75,30 Z" fill="#81f0e5" />
+            <!-- Body -->
+            <path d="M90,85 L110,85 L110,140 L90,140 Z" fill="#f0f0f0" class="bone bone-3" />
+            <!-- Arms -->
+            <path d="M110,95 L160,110 L155,120 L110,105 Z" fill="#f0f0f0" class="bone bone-4" />
+            <path d="M90,95 L40,110 L45,120 L90,105 Z" fill="#f0f0f0" class="bone bone-1" />
+            <!-- Legs -->
+            <path d="M95,140 L95,170 L90,170 L90,140 Z" fill="#f0f0f0" class="bone bone-2" />
+            <path d="M105,140 L105,170 L110,170 L110,140 Z" fill="#f0f0f0" class="bone bone-3" />
+            <!-- Guitar -->
+            <path d="M60,100 C40,120 60,150 100,140 C140,150 160,120 140,100 C120,80 80,80 60,100 Z" fill="#8c7b6b" />
+            <path d="M70,105 C55,120 70,140 100,133 C130,140 145,120 130,105 C115,90 85,90 70,105 Z" fill="#6d5d4f" />
+            <line x1="100" y1="60" x2="100" y2="120" stroke="#6d5d4f" stroke-width="3" />
+          </svg>
+          <div class="skeleton-label">Guitar</div>
+        </div>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Password</mat-label>
-      <input matInput formControlName="password" type="password" placeholder="Enter password" />
-      <!-- <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
-      <mat-error *ngIf="password?.hasError('minlength')">Minimum 6 characters</mat-error> -->
-    </mat-form-field>
+        <!-- Standup Skeleton -->
+        <div class="skeleton-figure">
+          <svg class="skeleton-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <circle cx="100" cy="60" r="25" fill="#f0f0f0" class="bone bone-3" />
+            <!-- Cap -->
+            <path d="M80,45 C80,30 120,30 120,45 L120,35 C120,20 80,20 80,35 Z" fill="#ffe66d" />
+            <path d="M75,35 C75,25 125,25 125,35 L125,30 C125,20 75,20 75,30 Z" fill="#fff6b9" />
+            <!-- Body -->
+            <path d="M90,85 L110,85 L110,140 L90,140 Z" fill="#f0f0f0" class="bone bone-4" />
+            <!-- Arms -->
+            <path d="M110,95 L140,75 L135,85 L110,105 Z" fill="#f0f0f0" class="bone bone-1" />
+            <path d="M90,95 L60,75 L65,85 L90,105 Z" fill="#f0f0f0" class="bone bone-2" />
+            <!-- Legs -->
+            <path d="M95,140 L95,170 L90,170 L90,140 Z" fill="#f0f0f0" class="bone bone-3" />
+            <path d="M105,140 L105,170 L110,170 L110,140 Z" fill="#f0f0f0" class="bone bone-4" />
+            <!-- Stage -->
+            <rect x="40" y="170" width="120" height="5" fill="#ff6b6b" />
+            <text x="100" y="165" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">STAGE</text>
+            <!-- Microphone Stand -->
+            <line x1="160" y1="170" x2="160" y2="100" stroke="#4a4a4a" stroke-width="3" />
+            <circle cx="160" cy="90" r="8" fill="#4a4a4a" />
+            <circle cx="160" cy="90" r="4" fill="#f0f0f0" />
+          </svg>
+          <div class="skeleton-label">Standup</div>
+        </div>
 
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Confirm Password</mat-label>
-      <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm password" />
-      <!-- <mat-error *ngIf="confirmPassword?.hasError('required')">Confirm Password is required</mat-error>
-      <mat-error *ngIf="registerForm.hasError('mismatch')">Passwords do not match</mat-error> -->
-    </mat-form-field>
+        <!-- Gardening Skeleton -->
+        <div class="skeleton-figure">
+          <svg class="skeleton-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <circle cx="100" cy="60" r="25" fill="#f0f0f0" class="bone bone-4" />
+            <!-- Cap -->
+            <path d="M80,45 C80,30 120,30 120,45 L120,35 C120,20 80,20 80,35 Z" fill="#6a0572" />
+            <path d="M75,35 C75,25 125,25 125,35 L125,30 C125,20 75,20 75,30 Z" fill="#9b5de5" />
+            <!-- Body -->
+            <path d="M90,85 L110,85 L110,140 L90,140 Z" fill="#f0f0f0" class="bone bone-1" />
+            <!-- Arms -->
+            <path d="M110,95 L150,60 L145,70 L110,105 Z" fill="#f0f0f0" class="bone bone-2" />
+            <path d="M90,95 L50,60 L55,70 L90,105 Z" fill="#f0f0f0" class="bone bone-3" />
+            <!-- Legs -->
+            <path d="M95,140 L95,170 L90,170 L90,140 Z" fill="#f0f0f0" class="bone bone-4" />
+            <path d="M105,140 L105,170 L110,170 L110,140 Z" fill="#f0f0f0" class="bone bone-1" />
+            <!-- Plant -->
+            <path d="M50,60 L45,30 L55,30 Z" fill="#4caf50" />
+            <path d="M45,30 L40,10 L50,10 Z" fill="#4caf50" />
+            <path d="M55,30 L60,10 L70,10 Z" fill="#4caf50" />
+            <circle cx="50" cy="60" r="8" fill="#8bc34a" />
+            <!-- Watering Can -->
+            <path d="M150,80 L160,60 L165,65 L155,85 Z" fill="#4a4a4a" />
+            <path d="M160,60 L170,50 L175,55 L165,65 Z" fill="#6a6a6a" />
+            <path d="M170,50 L175,45 L180,50 L175,55 Z" fill="#8a8a8a" />
+            <!-- Water Drops -->
+            <circle cx="155" cy="90" r="3" fill="#29b6f6" />
+            <circle cx="150" cy="95" r="2" fill="#29b6f6" />
+            <circle cx="160" cy="100" r="4" fill="#29b6f6" />
+          </svg>
+          <div class="skeleton-label">Gardening</div>
+        </div>
+      </div>
+    </div>
 
-    <button mat-raised-button color="primary" class="full-width" type="submit" [disabled]="registerForm.invalid">
-      Register
-    </button>
-  </form>
+    <!-- Form Side -->
+    <div class="auth-side right-side">
+      <mat-card class="auth-card">
+        <h2>Register</h2>
 
-  <p class="login-link">
-    Already have an account? <a routerLink="/login">Login</a>
-  </p>
-</mat-card>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" type="text" placeholder="Enter your name" />
+            <mat-error *ngIf="name?.hasError('required')">Name is required</mat-error>
+            <mat-error *ngIf="name?.hasError('minlength')">Minimum 3 characters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="Enter your email" />
+            <mat-error *ngIf="email?.hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="email?.hasError('email')">Enter a valid email</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" placeholder="Enter password" />
+            <mat-error *ngIf="password?.hasError('required')">Password is required</mat-error>
+            <mat-error *ngIf="password?.hasError('minlength')">Minimum 6 characters</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput formControlName="confirmPassword" type="password" placeholder="Confirm password" />
+            <mat-error *ngIf="confirmPassword?.hasError('required')">Confirm Password is required</mat-error>
+            <mat-error *ngIf="registerForm.hasError('mismatch')">Passwords do not match</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" class="full-width" type="submit" [disabled]="registerForm.invalid">
+            Register
+          </button>
+        </form>
+
+        <p class="switch-link">
+          <span>
+            Already have an account?
+            <a routerLink="/login" (click)="setReversedState(false)">Login</a>
+          </span>
+        </p>
+      </mat-card>
+    </div>
+  </div>
+</div>
