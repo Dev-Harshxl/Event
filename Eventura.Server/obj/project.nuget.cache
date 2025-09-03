@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EIsEUm4YqZA=",
+  "dgSpecHash": "8USMje9W+r4=",
   "success": true,
   "projectFilePath": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\Eventura.Server.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\HarshalGupta\\.nuget\\packages\\mediatr\\13.0.0\\mediatr.13.0.0.nupkg.sha512",
+    "C:\\Users\\HarshalGupta\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\HarshalGupta\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.19\\microsoft.aspnetcore.authentication.jwtbearer.8.0.19.nupkg.sha512",
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\microsoft.aspnetcore.spaproxy\\8.0.19\\microsoft.aspnetcore.spaproxy.8.0.19.nupkg.sha512",
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
@@ -85,5 +88,18 @@
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\HarshalGupta\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1608",
+      "level": "Warning",
+      "message": "Detected package version outside of dependency constraint: MediatR.Extensions.Microsoft.DependencyInjection 11.1.0 requires MediatR (>= 11.0.0 && < 12.0.0) but version MediatR 13.0.0 was resolved.",
+      "projectPath": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\Eventura.Server.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\Eventura.Server.csproj",
+      "libraryId": "MediatR",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

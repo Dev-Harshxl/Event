@@ -1,15 +1,17 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 public class JwtOptions
 {
     public string Key { get; set; } = default!;
     public string Issuer { get; set; } = "MyApp";
     public string Audience { get; set; } = "MyAppAudience";
-    public int ExpirationMinutes { get; set; } = 60;
+    public int ExpirationMinutes { get; set; } = 1;
+
 }
 
 public class TokenService(IOptions<JwtOptions> opts) : ITokenService
@@ -37,5 +39,11 @@ public class TokenService(IOptions<JwtOptions> opts) : ITokenService
             signingCredentials: creds);
 
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+
+    public string CreateRefreshToken()
+    {
+        return Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
     }
 }

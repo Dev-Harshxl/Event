@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Eventura.Server.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 [Index(nameof(Email), IsUnique = true)]
 public class User
@@ -18,4 +18,11 @@ public class User
 
     [MaxLength(50)]
     public string Role { get; set; } = "User";
+
+    // 👇 Navigation properties
+    public ICollection<Event> Events { get; set; } = new List<Event>();
+    public ICollection<Rsvp> Rsvps { get; set; } = new List<Rsvp>();
+
+    public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+
 }

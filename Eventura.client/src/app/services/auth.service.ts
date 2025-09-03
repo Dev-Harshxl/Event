@@ -1,43 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { tap } from 'rxjs';
+
+interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private api = 'https://localhost:7269/api/auth'; // ✅ keep /auth here
+  private apiUrl = 'https://localhost:7269/api/auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  // 🟢 Register
-  register(body: { name: string; email: string; password: string; confirmPassword: string }): Observable<any> {
-    return this.http.post(`${this.api}/register`, body);
+  login(email: string, password: string) {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { email, password }).pipe(
+      tap(tokens => this.storeTokens(tokens))
+    );
   }
 
-  // 🟢 Login
-  login(email: string, password: string): Observable<{ accessToken: string }> {
-    return this.http.post<{ accessToken: string }>(`${this.api}/login`, { email, password })
-      .pipe(
-        tap(res => {
-          if (res.accessToken) {
-            localStorage.setItem('access_token', res.accessToken);
-          }
-        })
-      );
+  refreshToken() {
+    const refresh = localStorage.getItem('refreshToken');
+    return this.http.post<AuthResponse>(`${this.apiUrl}/refresh`, { refreshToken: refresh }).pipe(
+      tap(tokens => this.storeTokens(tokens))
+    );
   }
 
-  // 🟢 Logout
+  private storeTokens(tokens: AuthResponse) {
+    localStorage.setItem('accessToken', tokens.accessToken);
+    localStorage.setItem('refreshToken', tokens.refreshToken);
+  }
+
+  getAccessToken() {
+    return localStorage.getItem('accessToken');
+  }
+
   logout() {
-    localStorage.removeItem('access_token');
-  }
-
-  // 🟢 Helper: Get token
-  get token(): string | null {
-    return localStorage.getItem('access_token');
-  }
-
-  // 🟢 Helper: Check if logged in
-  get isLoggedIn(): boolean {
-    return !!this.token;
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
   }
 }
