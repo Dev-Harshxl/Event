@@ -1,5 +1,5 @@
 // login.component.ts
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,6 +10,8 @@ import { MatError } from '@angular/material/form-field';
 import { AuthService } from '../../services/auth.service';
 import { LayoutService } from '../../services/layout.service'; 
 import { CommonModule } from '@angular/common';
+import { LogoComponent } from '../../features/logo/logo.component';
+
 
 @Component({
   selector: 'app-login',
@@ -22,12 +24,13 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     MatCardModule,
     RouterLink,
-    MatError
+    MatError,
+    LogoComponent
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit,AfterViewInit {
   loginForm: FormGroup;
   isReversed = false;
 
@@ -42,6 +45,43 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
+
+    ngAfterViewInit() {
+    // Create stars after view initializes
+    setTimeout(() => {
+      this.createStarfield();
+    });
+  }
+
+
+createStarfield() {
+  const starfield = document.getElementById('starfield');
+  if (!starfield) {
+    console.error('Starfield element not found!');
+    return;
+  }
+  
+  starfield.innerHTML = '';
+  
+  // Create more stars for better visibility
+  for (let i = 0; i < 200; i++) {
+    const star = document.createElement('div');
+    const size = Math.random() > 0.85 ? 'large' : (Math.random() > 0.6 ? 'medium' : 'small');
+    const brightness = 0.6 + Math.random() * 0.4; // Brighter stars
+    
+    star.classList.add('star', size);
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.animationDelay = `${Math.random() * 6}s`;
+    star.style.opacity = `${brightness}`;
+    
+    // Add some variation in animation duration
+    star.style.animationDuration = `${3 + Math.random() * 3}s`;
+    
+    starfield.appendChild(star);
+  }
+  console.log('Stars created successfully');
+}
 
   ngOnInit() {
     this.layoutService.isReversed$.subscribe(isReversed => {
