@@ -12,7 +12,7 @@ public class Event
     [Required]
     public DateTime EventDate { get; set; }
 
-        // NEW
+    // NEW
     public bool IsBlocked { get; set; } = false;
 
     [Required, MaxLength(250)]
@@ -21,7 +21,11 @@ public class Event
     [Required, MaxLength(100)]
     public string Category { get; set; } = default!;
 
-    public string? ImageUrl { get; set; }
+    // public string? ImageUrl { get; set; }
+
+    public byte[]? ImageData { get; set; }
+    public string? ImageContentType { get; set; }
+    public string? ImageFileName { get; set; }
 
     // Relationships
     [Required]

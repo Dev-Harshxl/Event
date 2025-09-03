@@ -95,6 +95,7 @@ var app = builder.Build();
 app.UseCors("ng");
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

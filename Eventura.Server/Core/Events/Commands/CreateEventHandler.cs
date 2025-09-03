@@ -1,7 +1,7 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Eventura.Server.Core.Events.Dtos;
+﻿using Eventura.Server.Core.Events.Dtos;
 using Eventura.Server.Infrastructure.Data;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Eventura.Server.Core.Events.Commands
 {
@@ -31,7 +31,10 @@ namespace Eventura.Server.Core.Events.Commands
                 EventDate = r.EventDate,
                 Location = r.Location.Trim(),
                 Category = r.Category?.Trim() ?? "General",
-                CreatedById = r.CreatedById
+                CreatedById = r.CreatedById,
+                ImageData = r.ImageData,
+                ImageContentType = r.ImageContentType,
+                ImageFileName = r.ImageFileName,
             };
 
             _db.Events.Add(ev);

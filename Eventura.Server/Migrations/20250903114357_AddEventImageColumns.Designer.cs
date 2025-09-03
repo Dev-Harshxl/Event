@@ -4,6 +4,7 @@ using Eventura.Server.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Eventura.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250903114357_AddEventImageColumns")]
+    partial class AddEventImageColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,58 +74,6 @@ namespace Eventura.Server.Migrations
                     b.HasIndex("CreatedById");
 
                     b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("Eventura.Server.Domain.Entities.EventFeedback", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("Image1")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Image1ContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Image2")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Image2ContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("Image3")
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("Image3ContentType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("Eventura.Server.Domain.Entities.RefreshToken", b =>
@@ -229,25 +180,6 @@ namespace Eventura.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("CreatedBy");
-                });
-
-            modelBuilder.Entity("Eventura.Server.Domain.Entities.EventFeedback", b =>
-                {
-                    b.HasOne("Event", "Event")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Eventura.Server.Domain.Entities.RefreshToken", b =>
