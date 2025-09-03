@@ -1,36 +1,36 @@
-*{
+  *{
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+
+  }
+
+
+  :root {
+    --bg-color: #000;
+    --secondary-color: #254D70;
+    --primary-color: #B6B09F;
+    --text-color : #131D4F;
+    --button-color: #954C2E;
+    --font-family: 'Segoe UI', sans-serif;
+  }
+
+
+
+  html, body {
+    height: 100%;
+    width: 100%;
     margin: 0;
-    padding: 0;
-    text-decoration: none;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    overflow-x: hidden;
+  }
 
-}
-
-
-:root {
-  --bg-color: #000;
-  --secondary-color: #254D70;
-  --primary-color: #B6B09F;
-  --text-color : #131D4F;
-  --button-color: #954C2E;
-  --font-family: 'Segoe UI', sans-serif;
-}
-
-
-
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: var(--font-family);
-  overflow-x: hidden;
-}
-
-app-root {
-  display: block;
-  min-height: 100vh; /* fills full viewport */
-  width: 100%;
-  background-color: var(--bg-color);
-}
+  app-root {
+    display: block;
+    min-height: 100vh; /* fills full viewport */
+    width: 100%;
+    background-color: var(--bg-color);
+  }
 

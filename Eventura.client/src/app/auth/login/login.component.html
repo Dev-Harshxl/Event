@@ -1,19 +1,26 @@
 <!-- login.component.html -->
 <div class="auth-wrapper">
+
+  <!-- Starfield Background -->
+  <div class="starfield" id="starfield"></div>
+
+  <!-- Orange-red gradient light -->
+  <div class="gradient-light"></div>
+
+
   <div class="auth-container" [class.reversed]="isReversed">
+
     <!-- Content Side -->
     <div class="auth-side left-side">
       <div class="brand">
-        <h1>🎉 Eventura</h1>
-        <p>Your Gateway to Memorable Events</p>
+
+
+
+        <div class="logo-container">
+          <app-logo></app-logo>
+        </div>
       </div>
-      <!-- <div class="art">
-        <img src="assets/mic.png" alt="Mic Skeleton" />
-        <img src="assets/guitar.png" alt="Guitar Skeleton" />
-        <img src="assets/stage.png" alt="Stage Skeleton" />
-        <img src="assets/plants.png" alt="Plant Skeleton" />
-      </div> -->
-      <!-- In both login.component.html and register.component.html -->
+
       <div class="skeleton-art">
         <!-- Singing Skeleton with Mic -->
         <div class="skeleton-figure">
@@ -79,15 +86,45 @@
             <!-- Legs -->
             <path d="M95,140 L95,170 L90,170 L90,140 Z" fill="#f0f0f0" class="bone bone-3" />
             <path d="M105,140 L105,170 L110,170 L110,140 Z" fill="#f0f0f0" class="bone bone-4" />
-            <!-- Stage -->
-            <rect x="40" y="170" width="120" height="5" fill="#ff6b6b" />
-            <text x="100" y="165" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">STAGE</text>
+            <!-- Enhanced Stage - Bigger and higher -->
+            <rect x="30" y="155" width="140" height="10" fill="#ff6b6b" rx="2" />
+            <rect x="25" y="165" width="150" height="5" fill="#ff5252" rx="1" />
+            <text x="100" y="150" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold"
+              font-family="Arial, sans-serif">STAGE</text>
             <!-- Microphone Stand -->
-            <line x1="160" y1="170" x2="160" y2="100" stroke="#4a4a4a" stroke-width="3" />
-            <circle cx="160" cy="90" r="8" fill="#4a4a4a" />
-            <circle cx="160" cy="90" r="4" fill="#f0f0f0" />
+            <line x1="160" y1="165" x2="160" y2="100" stroke="#4a4a4a" stroke-width="3" />
+            <circle cx="160" cy="95" r="10" fill="#4a4a4a" />
+            <circle cx="160" cy="95" r="5" fill="#f0f0f0" />
           </svg>
           <div class="skeleton-label">Standup</div>
+        </div>
+
+        <!-- Weight lifting -->
+        <div class="skeleton-figure">
+          <svg class="skeleton-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <circle cx="100" cy="60" r="25" fill="#f0f0f0" class="bone bone-1" />
+            <!-- Cap -->
+            <path d="M80,45 C80,30 120,30 120,45 L120,35 C120,20 80,20 80,35 Z" fill="#ff8c00" />
+            <path d="M75,35 C75,25 125,25 125,35 L125,30 C125,20 75,20 75,30 Z" fill="#ffa54f" />
+            <!-- Body -->
+            <path d="M90,85 L110,85 L110,140 L90,140 Z" fill="#f0f0f0" class="bone bone-2" />
+            <!-- Arms - Lifting position -->
+            <path d="M110,95 L140,70 L135,80 L110,105 Z" fill="#f0f0f0" class="bone bone-3" />
+            <path d="M90,95 L60,70 L65,80 L90,105 Z" fill="#f0f0f0" class="bone bone-4" />
+            <!-- Legs -->
+            <path d="M95,140 L95,170 L90,170 L90,140 Z" fill="#f0f0f0" class="bone bone-1" />
+            <path d="M105,140 L105,170 L110,170 L110,140 Z" fill="#f0f0f0" class="bone bone-2" />
+            <!-- Dumbbell Left -->
+            <path d="M55,75 L35,75 L35,85 L55,85 Z" fill="#4a4a4a" />
+            <circle cx="35" cy="80" r="8" fill="#6a6a6a" />
+            <circle cx="55" cy="80" r="8" fill="#6a6a6a" />
+            <!-- Dumbbell Right -->
+            <path d="M145,75 L165,75 L165,85 L145,85 Z" fill="#4a4a4a" />
+            <circle cx="165" cy="80" r="8" fill="#6a6a6a" />
+            <circle cx="145" cy="80" r="8" fill="#6a6a6a" />
+          </svg>
+          <div class="skeleton-label">Weight Lifting</div>
         </div>
 
         <!-- Gardening Skeleton -->
@@ -127,6 +164,7 @@
 
     <!-- Form Side -->
     <div class="auth-side right-side">
+      
       <mat-card class="auth-card">
         <h2>Login</h2>
 
@@ -160,6 +198,8 @@
           </span>
         </p>
       </mat-card>
+      <h4>Eventura</h4>
+      <h4>Community Booking Platform</h4>
     </div>
   </div>
 </div>
