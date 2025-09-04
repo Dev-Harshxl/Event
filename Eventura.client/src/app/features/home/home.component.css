@@ -2,14 +2,14 @@ html,
 body {
   margin: 0;
   height: 100%;
-  overflow: hidden; /* remove browser scroll */
+  overflow: hidden;
 }
 
 .sidenav-container {
   height: 100vh;
+  background: #000;
 }
 
-/* === Full Page Snap Scrolling === */
 .home-page {
   height: 100%;
   width: 100%;
@@ -25,20 +25,25 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 /* === HERO CAROUSEL === */
 .hero-carousel {
   position: relative;
   overflow: hidden;
+  z-index: 1; /* keep behind menu/logo */
+
 }
 
 .slide {
   position: absolute;
   top: 0;
+  inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0 */
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100vh !important;
+  background: #000;
   background-size: cover;
   background-position: center;
   opacity: 0;
@@ -51,7 +56,7 @@ body {
 
 .slide.active {
   opacity: 1;
-  transform: scale(1) translateY(0); /* zooms into place */
+  transform: scale(1) translateY(0);
   z-index: 2;
 }
 
@@ -61,6 +66,13 @@ body {
   transform: scale(0.95) translateY(-20px); /* shrinks + moves up */
 }
 
+.content{
+  height: auto;
+  background: #000;
+  width: 99%;
+  padding: .5%;
+}
+
 /* === Overlay Text === */
 .overlay {
   color: white;
@@ -68,17 +80,11 @@ body {
   padding: 2rem;
   border-radius: 10px;
   animation: fadeInUp 1s ease;
+  background: rgba(0,0,0,0.3);
 }
 
-.overlay h1 {
-  font-size: 3rem;
-  font-weight: bold;
-}
-
-.overlay p {
-  font-size: 1.4rem;
-  margin-top: 1rem;
-}
+.overlay h1 { font-size: 3rem; font-weight: bold; }
+.overlay p { font-size: 1.4rem; margin-top: 1rem; }
 
 @keyframes fadeInUp {
   from {
@@ -90,43 +96,43 @@ body {
     transform: translateY(0);
   }
 }
-
-/* === LOGO TOP-LEFT === */
+/* === LOGO === */
 .logo {
   position: fixed;
   top: 15px;
   left: 20px;
-  z-index: 5; /* above carousel + menu */
+  z-index: 5;
   cursor: pointer;
+  transition: opacity 0.6s ease; /* fade transition */
 }
-
+.logo.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 .logo img {
-  height: 275px; /* adjusted for corner */
+  height: 175px;
   width: auto;
+  margin-top: -35px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
   transition: transform 0.3s ease;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
-  margin-top: -50px;
 }
-
 .logo img:hover {
   transform: scale(1.08);
 }
 
-/* === MATERIAL MENU BAR === */
+/* === TOOLBAR (always visible) === */
 .custom-toolbar {
   position: fixed;
   top: 35px;
-  right: -10%;
+  left: 50%;
   transform: translateX(-50%);
   border-radius: 12px;
-  background: transparent;
+  background: #000;
   color: #ffcc00 !important;
   padding: 0 1rem;
-  transition: all 0.5s ease-in-out;
   width: fit-content;
   z-index: 4;
 }
-
 .custom-toolbar a {
   color: white !important;
   font-weight: 600;
@@ -160,4 +166,111 @@ body {
   margin: 0.5rem 0;
   font-size: 1.1rem;
   color: white;
+}
+
+
+.category-section {
+  width: 100%;
+  background: #181818; /* solid background to separate from carousel */
+  z-index: 3;
+  padding-top: 2%;
+}
+
+.category-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 40px 0 20px 20px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  border-left: 5px solid #ff4081; /* Accent line */
+  padding-left: 12px;
+}
+
+.category-section:first-of-type {
+  padding-top: 100px;
+}
+
+.card-row {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scrollbar-width: none; /* Firefox */
+}
+.card-row::-webkit-scrollbar { display: none; }
+
+.event-card {
+  flex: 0 0 calc(25% - 8rem); /* 5 per row on desktop */
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card-image {
+  flex: 1; /* takes 60–70% height */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;   /* keeps aspect ratio */
+  object-fit: contain;  /* full image, no crop */
+}
+
+.card-info {
+  padding: 0.8rem;
+}
+.card-info h3 { margin: 0; font-size: 1.1rem; }
+.card-info .category { font-size: 0.9rem; color: #ccc; }
+.card-info button {
+  margin-top: 0.5rem;
+  width: 100%;
+}
+.see-details {
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  margin-left: 170pxl;
+  color: #ffcc00;
+  text-decoration: none;
+}
+.see-details:hover { text-decoration: underline; }
+
+/* See More Card */
+.event-card.see-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #333;
+}
+.event-card.see-more a {
+  font-weight: bold;
+  color: #ffcc00;
+  text-transform: uppercase;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .event-card { flex: 0 0 calc(33.33% - 1rem); } /* 3 per row */
+}
+@media (max-width: 768px) {
+  .event-card { flex: 0 0 calc(50% - 1rem); } /* 2 per row */
+}
+@media (max-width: 480px) {
+  .event-card { flex: 0 0 100%; } /* 1 per row */
+}
+
+/* === FOOTER === */
+.footer {
+  background: #111;
+  color: #aaa;
+  text-align: center;
+
 }

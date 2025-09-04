@@ -1,6 +1,12 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- Right Side Sidenav -->
-  <mat-sidenav #drawer [mode]="'over'" [position]="'end'" [(opened)]="isSidenavOpen" class="custom-sidenav">
+  <mat-sidenav
+    #drawer
+    [mode]="'over'"
+    [position]="'end'"
+    [(opened)]="isSidenavOpen"
+    class="custom-sidenav"
+  >
     <div class="sidenav-content">
       <a mat-button routerLink="/organize">Organize Event</a>
       <a mat-button routerLink="/your-events">Your Event List</a>
@@ -13,13 +19,12 @@
 
   <mat-sidenav-content>
     <div class="home-page">
-      
-      <!-- Logo (Top-Left Sticky) -->
-      <div class="logo" routerLink="/home">
-        <img src="assets/logo2.png" alt="Logo">
+      <!-- Logo -->
+      <div class="logo" routerLink="/home" [class.hidden]="logoHidden">
+        <img src="assets/logo2.png" alt="Logo" />
       </div>
 
-      <!-- Permanent Top Menu -->
+      <!-- Top Menu (always visible) -->
       <mat-toolbar class="mat-elevation-z6 custom-toolbar">
         <a mat-button routerLink="/home">Home</a>
         <a mat-button routerLink="/events">Events</a>
@@ -27,10 +32,9 @@
         <a mat-button routerLink="/nearby">Nearby</a>
         <a mat-button routerLink="/contact">Contact</a>
 
-        <!-- Spacer -->
         <span class="flex-spacer"></span>
 
-        <!-- Hamburger Icon -->
+        <!-- Hamburger -->
         <button mat-icon-button (click)="toggleSidenav()">
           <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
         </button>
@@ -38,9 +42,12 @@
 
       <!-- Hero Carousel -->
       <div class="hero-carousel section">
-        <div class="slide" *ngFor="let slide of slides; let i = index"
-             [class.active]="i === currentIndex"
-             [style.backgroundImage]="'url(' + slide.img + ')'">
+        <div
+          class="slide"
+          *ngFor="let slide of slides; let i = index"
+          [class.active]="i === currentIndex"
+          [style.backgroundImage]="'url(' + slide.img + ')'"
+        >
           <div class="overlay">
             <h1>{{ slide.title }}</h1>
             <p>{{ slide.text }}</p>
@@ -48,17 +55,40 @@
         </div>
       </div>
 
-      <!-- Snap Section 2 -->
+      <!-- Categories -->
       <section class="section content">
-        <h2>Welcome to Our Event Platform</h2>
-        <p>Scroll down for more info...</p>
+        <div *ngFor="let category of categories" class="category-section">
+          <h2>{{ category.title }}</h2>
+          <div class="card-row">
+            <div
+              class="event-card"
+              *ngFor="let card of category.cards; let i = index"
+            >
+              <div class="card-image">
+                <img [src]="card.img" alt="{{ card.title }}" />
+              </div>
+              <div class="card-info">
+                <h3>{{ card.title }}</h3>
+                <p class="category">{{ card.category }}</p>
+                <button mat-raised-button color="primary">Book a Spot</button>
+                <a href="#" class="see-details">See Details →</a>
+              </div>
+            </div>
+
+            <!-- See More -->
+            <div class="event-card see-more">
+              <div class="card-info">
+                <a mat-button color="accent" routerLink="/events">See More →</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- Snap Section 3 -->
-      <section class="section content">
-        <h2>More About Us</h2>
-        <p>Another full-page section here...</p>
-      </section>
+      <!-- Footer -->
+      <footer class="footer section">
+        <p>© 2025 Event Platform | All Rights Reserved</p>
+      </footer>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,0 +1,70 @@
+.sidenav-container {
+  height: 100vh;
+  background: #000;
+}
+
+/* === LOGO === */
+.logo {
+  position: fixed;
+  top: 15px;
+  left: 20px;
+  z-index: 5;
+  cursor: pointer;
+  transition: opacity 0.6s ease;
+}
+.logo img {
+  height: 175px;
+  width: auto;
+  margin-top: -35px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s ease;
+}
+.logo img:hover {
+  transform: scale(1.08);
+}
+
+/* === TOOLBAR (always visible) === */
+.custom-toolbar {
+  position: fixed;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 12px;
+  background: #000;
+  color: #ffcc00 !important;
+  padding: 0 1rem;
+  width: fit-content;
+  z-index: 4;
+}
+.custom-toolbar a {
+  color: white !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+.custom-toolbar a:hover {
+  color: #ffcc00 !important;
+}
+
+/* Spacer inside toolbar */
+.flex-spacer {
+  flex: 1 1 auto;
+}
+
+/* === SIDENAV === */
+.custom-sidenav {
+  width: 280px;
+  background: #212121;
+  color: white;
+  padding: 1.5rem;
+}
+.sidenav-content a,
+.sidenav-content button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+  color: white;
+}

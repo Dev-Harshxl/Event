@@ -1,0 +1,100 @@
+.events-page {
+  width: 100%;
+  height: 100%;
+  background: #181818;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Search Bar */
+.search-bar {
+  width: 80%;
+  margin: 120px auto 20px; /* leaves space for navbar */
+  text-align: center;
+}
+.search-bar input {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #222;
+  color: #fff;
+}
+
+/* Scrollable Container */
+.event-scroll {
+  width: 100%;
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+/* Event Cards */
+.event-card {
+  width: 80%;
+  max-width: 1000px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  color: white;
+  margin-bottom: 20px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.card-image img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.card-info {
+  flex: 2;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.card-info h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.card-info .category {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+.card-info button {
+  margin-top: 0.5rem;
+  width: fit-content;
+}
+.see-details {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: #ffcc00;
+  text-decoration: none;
+}
+.see-details:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .event-card {
+    flex-direction: column;
+  }
+}

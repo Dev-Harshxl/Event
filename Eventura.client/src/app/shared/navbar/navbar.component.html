@@ -1,0 +1,44 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Right Side Sidenav -->
+  <mat-sidenav
+    #drawer
+    [mode]="'over'"
+    [position]="'end'"
+    [(opened)]="isSidenavOpen"
+    class="custom-sidenav"
+  >
+    <div class="sidenav-content">
+      <a mat-button routerLink="/organize">Organize Event</a>
+      <a mat-button routerLink="/your-events">Your Event List</a>
+      <a mat-button routerLink="/rsvp">RSVP</a>
+      <a mat-button routerLink="/attendees">Attendee's List</a>
+      <a mat-button routerLink="/profile">Profile & Account Settings</a>
+      <button mat-button color="warn">Logout</button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Logo -->
+    <div class="logo" routerLink="/home">
+      <img src="assets/logo2.png" alt="Logo" />
+    </div>
+
+    <!-- Top Menu (always visible) -->
+    <mat-toolbar class="mat-elevation-z6 custom-toolbar">
+      <a mat-button routerLink="/home">Home</a>
+      <a mat-button routerLink="/events">Events</a>
+      <a mat-button routerLink="/movies">Movies</a>
+      <a mat-button routerLink="/nearby">Nearby</a>
+      <a mat-button routerLink="/contact">Contact</a>
+
+      <span class="flex-spacer"></span>
+
+      <!-- Hamburger -->
+      <button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
