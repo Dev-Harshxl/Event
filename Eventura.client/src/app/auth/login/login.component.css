@@ -234,7 +234,7 @@ h2 {
   padding: 2px 8px;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(4px);
+  /* backdrop-filter: blur(4px); */
 }
 
 @keyframes float {
@@ -403,7 +403,7 @@ mat-form-field:hover {
   height: 600px;
   background: radial-gradient(circle, rgb(196, 120, 20) 0%, transparent 70%);
   opacity: 0.3;
-  filter: blur(40px);
+  /* filter: blur(40px); */
   z-index: 1;
   animation: pulseLight 8s infinite ease-in-out;
   pointer-events: none;
