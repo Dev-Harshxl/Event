@@ -68,3 +68,28 @@
   font-size: 1.1rem;
   color: white;
 }
+
+
+.user-greet {
+  margin-right: 8px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.profile-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffcc00; /* accent color */
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.profile-btn {
+  padding: 0;
+  min-width: 0;
+}

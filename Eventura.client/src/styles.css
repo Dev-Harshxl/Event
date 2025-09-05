@@ -56,3 +56,27 @@
   scrollbar-width: none;
 }
 
+
+
+.popup-success {
+  background: #4caf50; /* green */
+  color: white;
+  font-weight: 500;
+}
+
+.popup-error {
+  background: #f44336; /* red */
+  color: white;
+  font-weight: 500;
+}
+
+.popup-info {
+  background: #2196f3; /* blue */
+  color: white;
+  font-weight: 500;
+}
+
+
+.mat-mdc-menu-content{
+  padding: 0 !important;
+}

@@ -1,19 +1,13 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- Right Side Sidenav -->
-  <mat-sidenav
-    #drawer
-    [mode]="'over'"
-    [position]="'end'"
-    [(opened)]="isSidenavOpen"
-    class="custom-sidenav"
-  >
+  <mat-sidenav #drawer [mode]="'over'" [position]="'end'" [(opened)]="isSidenavOpen" class="custom-sidenav">
     <div class="sidenav-content">
       <a mat-button routerLink="/organize">Organize Event</a>
       <a mat-button routerLink="/your-events">Your Event List</a>
       <a mat-button routerLink="/rsvp">RSVP</a>
       <a mat-button routerLink="/attendees">Attendee's List</a>
       <a mat-button routerLink="/profile">Profile & Account Settings</a>
-      <button mat-button color="warn">Logout</button>
+      <button mat-button color="warn" (click)="logout()">Logout</button>
     </div>
   </mat-sidenav>
 
@@ -33,10 +27,36 @@
 
       <span class="flex-spacer"></span>
 
-      <!-- Hamburger -->
+      <ng-container *ngIf="isLoggedIn; else loggedOut">
+        <!-- Profile Circle with Initial -->
+        <button mat-button [matMenuTriggerFor]="menu" class="profile-btn">
+          <div class="profile-circle">
+            {{ username ? (username[0] | uppercase) : '?' }}
+          </div>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </mat-menu>
+      </ng-container>
+
+      <!-- If logged out -->
+      <ng-template #loggedOut>
+        <button mat-button routerLink="/login">
+          <mat-icon>login</mat-icon>
+          Login
+        </button>
+      </ng-template>
+
+
+
+      <!-- Hamburger
       <button mat-icon-button (click)="toggleSidenav()">
         <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
-      </button>
+      </button> -->
     </mat-toolbar>
 
     <ng-content></ng-content>

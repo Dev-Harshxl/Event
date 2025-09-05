@@ -1,12 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- Right Side Sidenav -->
-  <mat-sidenav
-    #drawer
-    [mode]="'over'"
-    [position]="'end'"
-    [(opened)]="isSidenavOpen"
-    class="custom-sidenav"
-  >
+  <mat-sidenav #drawer [mode]="'over'" [position]="'end'" [(opened)]="isSidenavOpen" class="custom-sidenav">
     <div class="sidenav-content">
       <a mat-button routerLink="/organize">Organize Event</a>
       <a mat-button routerLink="/your-events">Your Event List</a>
@@ -27,27 +21,49 @@
       <!-- Top Menu (always visible) -->
       <mat-toolbar class="mat-elevation-z6 custom-toolbar">
         <a mat-button routerLink="/home">Home</a>
-        <a mat-button routerLink="/events">Events</a>
+        <a mat-button routerLink="/event">Events</a>
         <a mat-button routerLink="/movies">Movies</a>
-        <a mat-button routerLink="/nearby">Nearby</a>
+        <a mat-button routerLink="/organize">Organize</a>
         <a mat-button routerLink="/contact">Contact</a>
 
         <span class="flex-spacer"></span>
+        <div class="Initial">
+          <ng-container *ngIf="isLoggedIn; else loggedOut">
+            <!-- Profile Circle with Initial -->
+            <button mat-button [matMenuTriggerFor]="menu" class="profile-btn">
+              <div class="profile-circle">
+                {{ username ? (username[0] | uppercase) : '?' }}
+              </div>
+            </button>
+
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="logout()" style="background-color: black; color: wheat;">
+                <mat-icon>logout</mat-icon>
+                Logout
+              </button>
+            </mat-menu>
+          </ng-container>
+
+          <!-- If logged out -->
+          <ng-template #loggedOut>
+            <button mat-button routerLink="/login">
+              <mat-icon style="font-weight: 900; color: white;">login</mat-icon>
+              Login
+            </button>
+          </ng-template>
+        </div>
+
 
         <!-- Hamburger -->
-        <button mat-icon-button (click)="toggleSidenav()">
+        <!-- <button mat-icon-button (click)="toggleSidenav()">
           <mat-icon>{{ isSidenavOpen ? 'close' : 'menu' }}</mat-icon>
-        </button>
+        </button> -->
       </mat-toolbar>
 
       <!-- Hero Carousel -->
       <div class="hero-carousel section">
-        <div
-          class="slide"
-          *ngFor="let slide of slides; let i = index"
-          [class.active]="i === currentIndex"
-          [style.backgroundImage]="'url(' + slide.img + ')'"
-        >
+        <div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === currentIndex"
+          [style.backgroundImage]="'url(' + slide.img + ')'">
           <div class="overlay">
             <h1>{{ slide.title }}</h1>
             <p>{{ slide.text }}</p>
@@ -60,16 +76,18 @@
         <div *ngFor="let category of categories" class="category-section">
           <h2>{{ category.title }}</h2>
           <div class="card-row">
-            <div
-              class="event-card"
-              *ngFor="let card of category.cards; let i = index"
-            >
+
+            <!-- Cards -->
+            <div class="event-card" *ngFor="let card of category.cards">
               <div class="card-image">
-                <img [src]="card.img" alt="{{ card.title }}" />
+                <img [src]="'https://localhost:7269/api/Events/' + card.id + '/image'" alt="{{ card.title }}"
+                  (error)="onImageError($event)" />
+
               </div>
               <div class="card-info">
                 <h3>{{ card.title }}</h3>
                 <p class="category">{{ card.category }}</p>
+                <p>{{ card.location }} | {{ card.dateTime | date:'medium' }}</p>
                 <button mat-raised-button color="primary">Book a Spot</button>
                 <a href="#" class="see-details">See Details →</a>
               </div>
@@ -81,9 +99,11 @@
                 <a mat-button color="accent" routerLink="/events">See More →</a>
               </div>
             </div>
+
           </div>
         </div>
       </section>
+
 
       <!-- Footer -->
       <footer class="footer section">

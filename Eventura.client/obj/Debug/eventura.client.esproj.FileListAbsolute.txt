@@ -1,3 +1,1 @@
-C:\Users\HarshalGupta\OneDrive - Fusionstak\Desktop\Eventura\eventura.client\obj\Debug\eventura.client.esproj.CoreCompileInputs.cache
-C:\Users\sneha\Event\eventura.client\obj\Debug\eventura.client.esproj.CoreCompileInputs.cache
 C:\Users\sneha\OneDrive\Desktop\Eventura\Event\eventura.client\obj\Debug\eventura.client.esproj.CoreCompileInputs.cache

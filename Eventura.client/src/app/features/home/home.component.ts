@@ -3,14 +3,18 @@ import {
   OnInit,
   OnDestroy,
   AfterViewInit,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { EventService, EventDto } from '../../services/event.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-home',
@@ -23,48 +27,51 @@ import { RouterModule } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     MatSidenavModule,
-    RouterModule
-  ]
+    RouterModule,
+    MatMenuModule,
+    RouterModule,
+  ],
 })
 export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   isSidenavOpen = false;
   logoHidden = false;
+  isLoggedIn = false;
+  username: string | null = null;
+  categories: { title: string; cards: EventDto[] }[] = [];
+  slides = [
+    {
+      img: 'assets/slider/slideone.jpg',
+      title: 'Feel the Beat',
+      text: 'Join the most electrifying musical events and concerts around you.',
+    },
+    {
+      img: 'assets/slider/slidetwo.jpg',
+      title: 'Game On!',
+      text: 'Catch the thrill of sports events, from football matches to tournaments.',
+    },
+    {
+      img: 'assets/slider/slidethree.jpg',
+      title: 'Big Screen Magic',
+      text: 'Experience the latest blockbusters and movie nights with friends.',
+    },
+    {
+      img: 'assets/slider/slidefour.jpg',
+      title: 'Words that Inspire',
+      text: 'Be part of soulful poetry readings and open mic sessions.',
+    },
+    {
+      img: 'assets/slider/slidefive.jpg',
+      title: 'Celebrate Creativity',
+      text: 'Explore mesmerizing art exhibitions and creative workshops.',
+    },
+    {
+      img: 'assets/slider/slidesix.jpg',
+      title: 'Wander & Wonder',
+      text: 'Discover breathtaking destinations with curated travel events.',
+    },
+  ];
 
-slides = [
-  {
-    img: 'asse/slider/slideone.jpg',
-    title: 'Feel the Beat',
-    text: 'Join the most electrifying musical events and concerts around you.'
-  },
-  // {
-  //   img: 'assets/slider/slidetwo.jpg',
-  //   title: 'Game On!',
-  //   text: 'Catch the thrill of sports events, from football matches to tournaments.'
-  // },
-  // {
-  //   img: 'assets/slider/slidethree.jpg',
-  //   title: 'Big Screen Magic',
-  //   text: 'Experience the latest blockbusters and movie nights with friends.'
-  // },
-  // {
-  //   img: 'assets/slider/slidefour.jpg',
-  //   title: 'Words that Inspire',
-  //   text: 'Be part of soulful poetry readings and open mic sessions.'
-  // },
-  // {
-  //   img: 'assets/slider/slidefive.jpg',
-  //   title: 'Celebrate Creativity',
-  //   text: 'Explore mesmerizing art exhibitions and creative workshops.'
-  // },
-  // {
-  //   img: 'assets/slider/slidesix.jpg',
-  //   title: 'Wander & Wonder',
-  //   text: 'Discover breathtaking destinations with curated travel events.'
-  // }
-];
 
-
-  categories: { title: string; cards: any[] }[] = [];
 
   currentIndex = 0;
   intervalId: any;
@@ -72,18 +79,41 @@ slides = [
   private sections: HTMLElement[] = [];
   private currentSectionIndex = 0;
   private isScrolling = false;
+  private subs: Subscription[] = [];
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private elRef: ElementRef,
+    private eventService: EventService
+  ) {}
 
-  constructor(private elRef: ElementRef) {}
 
   ngOnInit(): void {
-    this.categories = [
-      { title: 'Movies', cards: this.generateCards('movie') },
-      { title: 'Musical Events', cards: this.generateCards('music') },
-      { title: 'Social Gatherings', cards: this.generateCards('social') },
-      { title: 'StandUps', cards: this.generateCards('comedy') },
-      { title: 'Happening Around You', cards: this.generateCards('nearby') }
-    ];
+    // Fetch events from API
+    this.eventService.getEvents({ includeBlocked: false }).subscribe(events => {
+      // 🔹 Group by category
+      const grouped = this.groupEventsByCategory(events);
+
+      this.categories = Object.keys(grouped).map(cat => ({
+        title: cat,
+        cards: grouped[cat]
+      }));
+    });
+
     this.startAutoSlide();
+
+    // Auth stuff
+    this.subs.push(
+      this.authService.isLoggedIn$.subscribe(status => {
+        this.isLoggedIn = status;
+      })
+    );
+
+    this.subs.push(
+      this.authService.usernameObs$.subscribe(name => {
+        this.username = name;
+      })
+    );
   }
 
   ngAfterViewInit(): void {
@@ -112,17 +142,15 @@ slides = [
     }, 5000);
   }
 
-  private generateCards(type: string) {
-    return Array.from({ length: 12 }).map((_, i) => {
-      const path = `assets/cards/${type}${i + 1}.jpg`;
-      console.log("paht ",type, path)
-      return {
-        img: path,
-        title: `${type} Event ${i + 1}`,
-        category: type
-      };
-    });
+  private groupEventsByCategory(events: EventDto[]): Record<string, EventDto[]> {
+    return events.reduce((acc, ev) => {
+      const key = ev.category || 'Other';
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(ev);
+      return acc;
+    }, {} as Record<string, EventDto[]>);
   }
+
 
   private onScroll(homePage: HTMLElement) {
     const secondSection = this.sections[1]; // Movies section
@@ -151,5 +179,16 @@ slides = [
     setTimeout(() => {
       this.isScrolling = false;
     }, 1000);
+  }
+
+onImageError(e: Event) {                      
+  const img = e.target as HTMLImageElement | null;
+  if (img) img.src = 'assets/placeholder.jpg';
+}
+
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
