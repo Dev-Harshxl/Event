@@ -1,34 +1,47 @@
 <app-navbar>
   <div class="events-page">
-    <!-- Search Bar -->
-    <div class="search-bar">
-      <input
-        type="text"
-        placeholder="Search events..."
-        [(ngModel)]="searchQuery"
-        (input)="filterCards()"
-      />
+    <!-- Top Bar with Search + Category -->
+    <div class="top-bar">
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search events..."
+          [(ngModel)]="searchQuery"
+          (input)="filterCards()"
+        />
+      </div>
+
+      <div class="category-filter">
+        <select [(ngModel)]="selectedCategory" (change)="filterCards()">
+          <option value="">All Categories</option>
+          <option *ngFor="let c of categories" [value]="c">{{ c | titlecase }}</option>
+        </select>
+      </div>
     </div>
 
-    <!-- Virtual Scroll List -->
+    <!-- Virtual Scroll Grid -->
     <cdk-virtual-scroll-viewport
-      itemSize="350"
+      itemSize="270"
       class="event-scroll"
       (scrolledIndexChange)="onScrollIndexChange($event)"
     >
-      <div *cdkVirtualFor="let card of displayedCards" class="event-card">
-        <div class="card-image">
-          <img [src]="card.img" alt="{{ card.title }}" />
-        </div>
-        <div class="card-info">
-          <h3>{{ card.title }}</h3>
-          <p class="category">{{ card.category }}</p>
-          <button mat-raised-button color="primary">Book a Spot</button>
-          <a href="#" class="see-details">See Details →</a>
+      <div class="event-grid">
+        <div *cdkVirtualFor="let card of displayedCards" class="event-card">
+          <div class="card-image">
+            <img [src]="card.image" (error)="card.image='assets/cards/placeholder.jpg'" alt="{{ card.title }}" />
+          </div>
+          <div class="card-info">
+            <h3>{{ card.title }}</h3>
+            <p class="category">{{ card.category }}</p>
+            <button mat-raised-button color="primary">Book a Spot</button>
+            <a href="#" class="see-details">See Details →</a>
+          </div>
         </div>
       </div>
     </cdk-virtual-scroll-viewport>
 
-    <app-footer></app-footer>
+    <footer class="footer" style="height: 100px;">
+      <p style="margin-top: 20px;">© 2025 Event Platform | All Rights Reserved</p>
+    </footer>
   </div>
 </app-navbar>

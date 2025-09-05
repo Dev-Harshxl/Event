@@ -19,8 +19,8 @@ namespace Eventura.Server.Core.Auth.Commands
 
         public async Task<AuthResponse> Handle(RefreshTokenCommand c, CancellationToken ct)
         {
-            var stored = await _db.RefreshTokens
-                .Include(r => r.User)
+            var stored = await _db
+                .RefreshTokens.Include(r => r.User)
                 .SingleOrDefaultAsync(r => r.Token == c.Token, ct);
 
             if (stored is null || stored.Expires < DateTime.UtcNow || stored.IsRevoked)
@@ -31,11 +31,9 @@ namespace Eventura.Server.Core.Auth.Commands
 
             stored.IsRevoked = true;
 
-            stored.User.RefreshTokens.Add(new RefreshToken
-            {
-                Token = newRefresh,
-                Expires = DateTime.UtcNow.AddDays(7),
-            });
+            stored.User.RefreshTokens.Add(
+                new RefreshToken { Token = newRefresh, Expires = DateTime.UtcNow.AddDays(7) }
+            );
 
             await _db.SaveChangesAsync(ct);
 

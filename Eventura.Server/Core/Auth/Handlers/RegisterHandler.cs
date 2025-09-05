@@ -31,7 +31,7 @@ namespace Eventura.Server.Core.Auth.Commands
             {
                 Name = dto.Name,
                 Email = dto.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password)
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),
             };
 
             _db.Users.Add(user);
@@ -40,11 +40,9 @@ namespace Eventura.Server.Core.Auth.Commands
             var access = _tokens.CreateAccessToken(user);
             var refresh = _tokens.CreateRefreshToken();
 
-            user.RefreshTokens.Add(new RefreshToken
-            {
-                Token = refresh,
-                Expires = DateTime.UtcNow.AddDays(7),
-            });
+            user.RefreshTokens.Add(
+                new RefreshToken { Token = refresh, Expires = DateTime.UtcNow.AddDays(7) }
+            );
 
             await _db.SaveChangesAsync(ct);
 

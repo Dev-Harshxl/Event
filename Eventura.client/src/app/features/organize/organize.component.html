@@ -1,0 +1,47 @@
+<!-- <app-navbar></app-navbar> -->
+
+<div class="organize-page">
+  <h1>Create Your Own Events</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" enctype="multipart/form-data">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Event Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="eventDate" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <input matInput formControlName="category" />
+    </mat-form-field>
+
+    <div class="file-upload">
+      <label for="image">Upload Image</label>
+      <input type="file" id="image" (change)="onFileSelected($event)" />
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">
+      Create Event
+    </button>
+  </form>
+</div>
+
+<footer class="footer">
+  <p>© 2025 Event Platform | All Rights Reserved</p>
+</footer>

@@ -8,6 +8,5 @@ public class FeedbackForm
     [MaxLength(250)]
     public string? Comment { get; set; }
 
-    // allow up to 3 images
     public List<IFormFile>? Images { get; set; }
 }

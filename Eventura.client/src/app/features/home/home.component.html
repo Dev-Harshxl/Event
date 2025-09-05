@@ -22,36 +22,36 @@
       <mat-toolbar class="mat-elevation-z6 custom-toolbar">
         <a mat-button routerLink="/home">Home</a>
         <a mat-button routerLink="/event">Events</a>
-        <a mat-button routerLink="/movies">Movies</a>
+        <!-- <a mat-button routerLink="/movies">Movies</a> -->
         <a mat-button routerLink="/organize">Organize</a>
         <a mat-button routerLink="/contact">Contact</a>
 
-        <span class="flex-spacer"></span>
-        <div class="Initial">
-          <ng-container *ngIf="isLoggedIn; else loggedOut">
-            <!-- Profile Circle with Initial -->
-            <button mat-button [matMenuTriggerFor]="menu" class="profile-btn">
-              <div class="profile-circle">
-                {{ username ? (username[0] | uppercase) : '?' }}
-              </div>
-            </button>
+        <!-- <span class="flex-spacer"></span> -->
 
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="logout()" style="background-color: black; color: wheat;">
-                <mat-icon>logout</mat-icon>
-                Logout
-              </button>
-            </mat-menu>
-          </ng-container>
+        <ng-container *ngIf="isLoggedIn; else loggedOut">
+          <!-- Profile Circle with Initial -->
+          <button mat-button [matMenuTriggerFor]="menu" class="profile-btn">
+            <div class="profile-circle">
+              {{ username ? (username[0] | uppercase) : '?' }}
+            </div>
+          </button>
 
-          <!-- If logged out -->
-          <ng-template #loggedOut>
-            <button mat-button routerLink="/login">
-              <mat-icon style="font-weight: 900; color: white;">login</mat-icon>
-              Login
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()" style="background-color: black; color: wheat;">
+              <mat-icon>logout</mat-icon>
+              Logout
             </button>
-          </ng-template>
-        </div>
+          </mat-menu>
+        </ng-container>
+
+        <!-- If logged out -->
+        <ng-template #loggedOut>
+          <button mat-button routerLink="/login">
+            <mat-icon style="font-weight: 900; color: white;">login</mat-icon>
+            <span style="color: white;">Login</span>
+          </button>
+        </ng-template>
+
 
 
         <!-- Hamburger -->
@@ -88,7 +88,9 @@
                 <h3>{{ card.title }}</h3>
                 <p class="category">{{ card.category }}</p>
                 <p>{{ card.location }} | {{ card.dateTime | date:'medium' }}</p>
-                <button mat-raised-button color="primary">Book a Spot</button>
+                <button mat-raised-button color="primary" (click)="openRsvpDialog(card)">
+                  Book a Spot
+                </button>
                 <a href="#" class="see-details">See Details →</a>
               </div>
             </div>
@@ -106,7 +108,7 @@
 
 
       <!-- Footer -->
-      <footer class="footer section">
+      <footer class="footer section" style="height: 90px;">
         <p>© 2025 Event Platform | All Rights Reserved</p>
       </footer>
     </div>

@@ -2,8 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { NavbarComponent } from '../../shared/navbar/navbar.component'
+import { HttpClient } from '@angular/common/http';
+import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
+
+interface Event {
+  id: number;
+  title: string;
+  description: string;
+  dateTime: string;
+  location: string;
+  category: string;
+  image?: string;
+}
 
 @Component({
   selector: 'app-events',
@@ -13,62 +24,51 @@ import { FooterComponent } from '../../shared/footer/footer.component';
   imports: [CommonModule, FormsModule, ScrollingModule, NavbarComponent, FooterComponent]
 })
 export class EventsComponent implements OnInit {
-  allCards: any[] = [];
-  displayedCards: any[] = [];
+  allCards: Event[] = [];
+  displayedCards: Event[] = [];
   searchQuery = '';
+  categories: string[] = [];
+  selectedCategory = '';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.allCards = this.generateAllCards();
-    this.displayedCards = [...this.allCards]; // initial load
+    this.fetchEvents();
   }
 
-  /** Generate random shuffled event cards */
-  private generateAllCards() {
-    const types = ['movie', 'music', 'social', 'comedy', 'nearby'];
-    let cards: any[] = [];
+  /** Fetch events from API */
+ fetchEvents() {
+  this.http.get<Event[]>('https://localhost:7269/api/Events').subscribe({
+    next: (data) => {
+      this.allCards = data.map(e => ({
+        ...e,
+        image: `https://localhost:7269/api/Events/${e.id}/image`
+      }));
+      this.displayedCards = [...this.allCards];
 
-    types.forEach(type => {
-      for (let i = 1; i <= 4; i++) {
-        cards.push({
-          img: `assets/cards/${type}${i}.jpg`,
-          title: `${type} Event ${i}`,
-          category: type
-        });
-      }
-    });
-
-    return this.shuffleArray(cards);
-  }
-
-  /** Fisher-Yates shuffle */
-  private shuffleArray(array: any[]) {
-    let shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
-  }
+      // Extract unique categories
+      this.categories = Array.from(new Set(this.allCards.map(e => e.category)));
+    },
+    error: (err) => console.error(' Error fetching events:', err)
+  });
+}
 
   /** Infinite scroll handler */
   onScrollIndexChange(event: any) {
-    // if user scrolls near bottom, append more random cards
     if (event > this.displayedCards.length - 10) {
-      this.displayedCards = [...this.displayedCards, ...this.shuffleArray(this.allCards)];
+      this.displayedCards = [...this.displayedCards, ...this.allCards];
     }
   }
 
-  /** Search filter */
+  /** Search + category filter */
   filterCards() {
     const query = this.searchQuery.toLowerCase();
-    if (!query) {
-      this.displayedCards = [...this.allCards];
-      return;
-    }
-    this.displayedCards = this.allCards.filter(
-      c => c.title.toLowerCase().includes(query) || c.category.toLowerCase().includes(query)
-    );
+    this.displayedCards = this.allCards.filter(c => {
+      const matchesSearch =
+        !query || c.title.toLowerCase().includes(query) || c.category.toLowerCase().includes(query);
+      const matchesCategory =
+        !this.selectedCategory || c.category === this.selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
   }
 }

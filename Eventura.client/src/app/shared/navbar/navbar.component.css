@@ -12,6 +12,7 @@
   cursor: pointer;
   transition: opacity 0.6s ease;
 }
+
 .logo img {
   height: 175px;
   width: auto;
@@ -19,6 +20,7 @@
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
   transition: transform 0.3s ease;
 }
+
 .logo img:hover {
   transform: scale(1.08);
 }
@@ -35,7 +37,9 @@
   padding: 0 1rem;
   width: fit-content;
   z-index: 4;
+   padding-left: 45px;
 }
+
 .custom-toolbar a {
   color: white !important;
   font-weight: 600;
@@ -43,6 +47,7 @@
   letter-spacing: 0.5px;
   transition: color 0.3s;
 }
+
 .custom-toolbar a:hover {
   color: #ffcc00 !important;
 }
@@ -59,6 +64,7 @@
   color: white;
   padding: 1.5rem;
 }
+
 .sidenav-content a,
 .sidenav-content button {
   display: block;
@@ -80,13 +86,16 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #ffcc00; /* accent color */
+  background: #ffcc00;
+  /* accent color */
   color: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   font-size: 16px;
+  position: relative;
+  left: 480px;
 }
 
 .profile-btn {

@@ -8,6 +8,6 @@
         string Location,
         string Category,
         int CreatedById,
-         bool IsBlocked
+        bool IsBlocked
     );
 }

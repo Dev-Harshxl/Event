@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 public class GetAllEventsHandler : IRequestHandler<GetAllEventsQuery, List<EventDto>>
 {
     private readonly AppDbContext _db;
+
     public GetAllEventsHandler(AppDbContext db) => _db = db;
 
     public async Task<List<EventDto>> Handle(GetAllEventsQuery q, CancellationToken ct)
@@ -32,9 +33,6 @@ public class GetAllEventsHandler : IRequestHandler<GetAllEventsQuery, List<Event
         if (q.To.HasValue)
             query = query.Where(e => e.EventDate <= q.To.Value);
 
-        return await query
-            .OrderBy(e => e.EventDate)
-            .Select(e => e.ToDto())
-            .ToListAsync(ct);
+        return await query.OrderBy(e => e.EventDate).Select(e => e.ToDto()).ToListAsync(ct);
     }
 }

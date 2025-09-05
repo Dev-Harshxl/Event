@@ -2,7 +2,7 @@
 *{
       margin: 0;
       padding: 0;
-      text-decoration: none;
+
 
   }
 
@@ -79,4 +79,21 @@
 
 .mat-mdc-menu-content{
   padding: 0 !important;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    background-color: #1e1e1e !important;
+}
+
+
+.mat-mdc-form-field.mat-form-field-animations-enabled .mdc-text-field__input {
+    color: wheat;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input{
+  color: white;
+}
+
+.rsvpForm input{
+color: white;
 }

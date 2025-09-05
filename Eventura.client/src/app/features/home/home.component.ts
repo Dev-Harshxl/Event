@@ -15,6 +15,11 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { EventService, EventDto } from '../../services/event.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDialog } from '@angular/material/dialog';
+import { } from '../rsvp/rsvp-dialog.component';
+import { HttpClient } from '@angular/common/http';
+import { NotificationService } from '../../shared/notification/notification.service';
+import { RsvpDialogComponent } from '../rsvp/rsvp-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -84,9 +89,49 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private authService: AuthService,
     private elRef: ElementRef,
-    private eventService: EventService
-  ) {}
+    private eventService: EventService,
+    private dialog: MatDialog,
+    private http: HttpClient,
+    private notify: NotificationService,
+  ) { }
+  openRsvpDialog(event: EventDto) {
+    if (!this.isLoggedIn) {
+      this.notify
+        .openDialog('Login Required', '⚠️ Please login to book your spot.')
+        .afterClosed()
+        .subscribe((confirmed) => {
+          if (confirmed) {
+            this.router.navigate(['/login']);
+          }
+        });
+      return;
+    }
 
+    // 🔹 Get email from token (auth service should decode token claims)
+    const email = this.authService.getUsername();
+
+    const dialogRef = this.dialog.open(RsvpDialogComponent, {
+      width: '400px',
+      data: { eventId: event.id, eventTitle: event.title, email }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.http.post(`https://localhost:7269/api/Events/${event.id}/rsvp`, {
+          status: result.status
+        }).subscribe({
+          next: () => this.notify.showMessage('✅ RSVP confirmed!'),
+          error: (err) => {
+            if (err.status === 409) {
+              this.notify.showMessage('⚠️ You have already RSVP’d for this event.');
+            } else {
+              this.notify.showMessage('❌ Failed to RSVP. Try again later.');
+            }
+          }
+        });
+      }
+    });
+  }
 
   ngOnInit(): void {
     // Fetch events from API
@@ -114,6 +159,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         this.username = name;
       })
     );
+
+
+
   }
 
   ngAfterViewInit(): void {
@@ -181,14 +229,18 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 1000);
   }
 
-onImageError(e: Event) {                      
-  const img = e.target as HTMLImageElement | null;
-  if (img) img.src = 'assets/placeholder.jpg';
-}
+  onImageError(e: Event) {
+    const img = e.target as HTMLImageElement | null;
+    if (img) img.src = 'assets/placeholder.jpg';
+  }
 
 
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+
+
+
 }

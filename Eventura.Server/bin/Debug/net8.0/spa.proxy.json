@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:2003",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\sneha\\OneDrive\\Desktop\\Eventura\\Event\\Eventura.Server\\..\\eventura.client",
+"WorkingDirectory": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\..\\eventura.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }

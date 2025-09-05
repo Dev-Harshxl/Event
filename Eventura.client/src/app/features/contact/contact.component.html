@@ -1,0 +1,26 @@
+
+<div class="contact-page">
+  <h1>Contact Us</h1>
+
+  <div class="contact-container">
+    <!-- Contact Form -->
+    <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="contact-form">
+      <input type="text" placeholder="Your Name" [(ngModel)]="name" name="name" required />
+      <input type="email" placeholder="Your Email" [(ngModel)]="email" name="email" required />
+      <textarea placeholder="Your Message" [(ngModel)]="message" name="message" rows="5" required></textarea>
+      <button type="submit" [disabled]="!contactForm.valid">Send Message</button>
+    </form>
+
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <h3>Our Office</h3>
+      <p> 123 Event Street, New York, USA</p>
+      <p> +1 234 567 890</p>
+      <p> supporteventura.com</p>
+
+      <!-- Map Placeholder -->
+      <div class="map-placeholder">Google Map Here</div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -10,11 +10,15 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './app/interceptors/auth.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    importProvidersFrom(FormsModule, MatDialogModule,MatSnackBarModule),
+    importProvidersFrom(FormsModule, MatDialogModule,MatSnackBarModule,MatFormFieldModule, MatInputModule, MatSelectModule),
     provideHttpClient(withInterceptors([authInterceptor])),
     provideAnimations()
   ]

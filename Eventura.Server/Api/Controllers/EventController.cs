@@ -15,7 +15,7 @@ namespace Eventura.Server.Api.Controllers
 
         public EventsController(IMediator mediator) => _mediator = mediator;
 
-        // PUBLIC: list events (unauth allowed). Admin may include blocked.
+        // PUBLIC: list events adn Admin may include blocked.
         [HttpGet]
         [AllowAnonymous]
         [ProducesResponseType(typeof(List<EventDto>), StatusCodes.Status200OK)]
@@ -56,22 +56,11 @@ namespace Eventura.Server.Api.Controllers
             return result is null ? NotFound() : Ok(result);
         }
 
-        // // AUTH: create own event
-        // [Authorize]
-        // [HttpPost]
-        // [ProducesResponseType(typeof(EventDto), StatusCodes.Status201Created)]
-        // public async Task<ActionResult<EventDto>> Create([FromBody] CreateEventCommand command, CancellationToken ct)
-        // {
-        //     var userId = GetUserId();
-        //     var cmd = command with { CreatedById = userId };
-        //     var result = await _mediator.Send(cmd, ct);
-        //     return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
-        // }
-
+        //create event
         [Authorize]
         [HttpPost]
         [ProducesResponseType(typeof(EventDto), StatusCodes.Status201Created)]
-        [RequestSizeLimit(10_000_000)] // 10 MB max, adjust as needed
+        [RequestSizeLimit(10_000_000)]
         public async Task<ActionResult<EventDto>> Create(
             [FromForm] CreateEventForm form,
             CancellationToken ct
@@ -235,9 +224,9 @@ namespace Eventura.Server.Api.Controllers
                 UserId: userId,
                 Rating: form.Rating,
                 Comment: form.Comment,
-                        Image1: form.Images.ElementAtOrDefault(0),
-        Image2: form.Images.ElementAtOrDefault(1),
-        Image3: form.Images.ElementAtOrDefault(2)
+                Image1: form.Images.ElementAtOrDefault(0),
+                Image2: form.Images.ElementAtOrDefault(1),
+                Image3: form.Images.ElementAtOrDefault(2)
             );
 
             await _mediator.Send(cmd, ct);

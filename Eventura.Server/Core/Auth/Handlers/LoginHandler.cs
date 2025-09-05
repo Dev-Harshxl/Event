@@ -21,8 +21,8 @@ namespace Eventura.Server.Core.Auth.Commands
         {
             var dto = c.Request;
 
-            var user = await _db.Users
-                .Include(u => u.RefreshTokens)
+            var user = await _db
+                .Users.Include(u => u.RefreshTokens)
                 .SingleOrDefaultAsync(u => u.Email == dto.Email, ct);
 
             if (user is null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
@@ -31,11 +31,9 @@ namespace Eventura.Server.Core.Auth.Commands
             var access = _tokens.CreateAccessToken(user);
             var refresh = _tokens.CreateRefreshToken();
 
-            user.RefreshTokens.Add(new RefreshToken
-            {
-                Token = refresh,
-                Expires = DateTime.UtcNow.AddDays(7),
-            });
+            user.RefreshTokens.Add(
+                new RefreshToken { Token = refresh, Expires = DateTime.UtcNow.AddDays(7) }
+            );
 
             await _db.SaveChangesAsync(ct);
 

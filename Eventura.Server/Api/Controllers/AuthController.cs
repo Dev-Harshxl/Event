@@ -1,5 +1,5 @@
-﻿using Eventura.Server.Core.Auth.Dtos;
-using Eventura.Server.Core.Auth.Commands;
+﻿using Eventura.Server.Core.Auth.Commands;
+using Eventura.Server.Core.Auth.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +11,7 @@ namespace Eventura.Server.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IMediator _mediator;
+
         public AuthController(IMediator mediator) => _mediator = mediator;
 
         [HttpPost("register")]
@@ -29,11 +30,20 @@ namespace Eventura.Server.Api.Controllers
         [HttpGet("me")]
         public ActionResult<UserInfo> Me()
         {
-            var id = int.Parse(User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "0");
+            var id = int.Parse(
+                User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "0"
+            );
             var name = User.Identity?.Name ?? "";
-            var email = User.Claims.FirstOrDefault(c =>
-                c.Type == System.Security.Claims.ClaimTypes.Email || c.Type == "email")?.Value ?? "";
-            var role = User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value ?? "User";
+            var email =
+                User.Claims.FirstOrDefault(c =>
+                    c.Type == System.Security.Claims.ClaimTypes.Email || c.Type == "email"
+                )?.Value
+                ?? "";
+            var role =
+                User.Claims.FirstOrDefault(c =>
+                    c.Type == System.Security.Claims.ClaimTypes.Role
+                )?.Value
+                ?? "User";
 
             return new UserInfo(id, name, email, role);
         }

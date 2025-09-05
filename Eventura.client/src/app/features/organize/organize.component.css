@@ -1,0 +1,50 @@
+.organize-page {
+
+  background: #000;
+  color: white;
+  padding: 20px 20px 60px;
+  text-align: center;
+}
+
+.organize-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #ffcc00;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+mat-form-field {
+  width: 100%;
+  background: #1e1e1e;
+  border-radius: 8px;
+}
+
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #ccc;
+}
+
+.file-upload input {
+  margin-top: 0.5rem;
+  color: white;
+}
+
+button {
+  align-self: center;
+  width: 200px;
+}
+
+
+mat-form-field input, 
+mat-form-field textarea {
+  color: white !important;
+}

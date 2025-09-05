@@ -1,13 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\sneha\\OneDrive\\Desktop\\Eventura\\Event\\",
+  "WorkspaceRootPath": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|c:\\users\\sneha\\onedrive\\desktop\\eventura\\event\\eventura.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|c:\\users\\harshalgupta\\onedrive - fusionstak\\desktop\\eventura\\eventura.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|solutionrelative:eventura.server\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|c:\\users\\harshalgupta\\onedrive - fusionstak\\desktop\\eventura\\eventura.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|solutionrelative:eventura.server\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|c:\\users\\sneha\\onedrive\\desktop\\eventura\\event\\eventura.server\\api\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|c:\\users\\harshalgupta\\onedrive - fusionstak\\desktop\\eventura\\eventura.server\\api\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7EDB7B7E-8B6F-41D4-A196-5158B3AE554F}|Eventura.Server\\Eventura.Server.csproj|solutionrelative:eventura.server\\api\\controllers\\eventcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -23,28 +27,39 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\sneha\\OneDrive\\Desktop\\Eventura\\Event\\Eventura.Server\\Program.cs",
-              "RelativeDocumentMoniker": "Eventura.Server\\Program.cs",
-              "ToolTip": "C:\\Users\\sneha\\OneDrive\\Desktop\\Eventura\\Event\\Eventura.Server\\Program.cs",
-              "RelativeToolTip": "Eventura.Server\\Program.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T22:50:44.816Z",
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\appsettings.json",
+              "RelativeDocumentMoniker": "Eventura.Server\\appsettings.json",
+              "ToolTip": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\appsettings.json",
+              "RelativeToolTip": "Eventura.Server\\appsettings.json",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-05T06:04:58.934Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\Program.cs",
+              "RelativeDocumentMoniker": "Eventura.Server\\Program.cs",
+              "ToolTip": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\Program.cs",
+              "RelativeToolTip": "Eventura.Server\\Program.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAAwHEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T22:50:44.816Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "EventController.cs",
-              "DocumentMoniker": "C:\\Users\\sneha\\OneDrive\\Desktop\\Eventura\\Event\\Eventura.Server\\Api\\Controllers\\EventController.cs",
+              "DocumentMoniker": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\Api\\Controllers\\EventController.cs",
               "RelativeDocumentMoniker": "Eventura.Server\\Api\\Controllers\\EventController.cs",
-              "ToolTip": "C:\\Users\\sneha\\OneDrive\\Desktop\\Eventura\\Event\\Eventura.Server\\Api\\Controllers\\EventController.cs",
+              "ToolTip": "C:\\Users\\HarshalGupta\\OneDrive - Fusionstak\\Desktop\\Eventura\\Eventura.Server\\Api\\Controllers\\EventController.cs",
               "RelativeToolTip": "Eventura.Server\\Api\\Controllers\\EventController.cs",
               "ViewState": "AgIAAKsAAAAAAAAAAAAkwMQAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T22:37:22.371Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-04T22:37:22.371Z"
             }
           ]
         }
